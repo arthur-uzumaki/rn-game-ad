@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.configuration.updateBuildConfiguration": "interactive",
+}

@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  googleId  String?  @unique
+  name      String
+  email     String   @unique
+  avatarUrl String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+model Game {
+  id        String @id @default(cuid())
+  title     String
+  bannerUrl String @map("banner_url")
+  ads       Ad[]
+
+  @@map("games")
+}
+
+model Ad {
+  id              String   @id @default(cuid())
+  name            String
+  yearsPlaying    Int
+  discord         String
+  weekDays        String
+  hourStart       Int
+  hourEnd         Int
+  gameId          String
+  useVoiceChannel Boolean
+  createdAt       DateTime @default(now()) @map("created_at")
+  game            Game     @relation(fields: [gameId], references: [id])
+
+  @@map("ads")
+}

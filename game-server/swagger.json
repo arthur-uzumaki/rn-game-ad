@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ads games server",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/sessions": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "authenticate user google",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idToken": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "idToken"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "token"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "fetch profile user",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "sub": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "avatarUrl": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "sub",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "user"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "description": "Fetch all games",
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/games/{gameId}/ads": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "description": "fetch the game associated with a specific ad",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "gameId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/ads/{adId}/discord": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "description": "fetch the Discord username associated with a specific ad",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "adId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    }
+  }
+}
